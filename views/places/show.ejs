@@ -1,0 +1,35 @@
+<% layout('layouts/boilerplate') %>
+<div class="row">
+  <div class="col-8 offset-2">
+    <div class="card shadow-lg rounded mb-3">
+      <img src="<%= foundPlace.image %>" class="card-img-top" alt="place" />
+      <div class="card-body">
+        <h5 class="card-title"><%= foundPlace.title %></h5>
+        <p class="card-text text-muted"><%= foundPlace.description %></p>
+      </div>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item"><%= foundPlace.location %></li>
+        <li class="list-group-item">
+          <span class="text-danger"
+            >Danger Level : <%= foundPlace.dangerLevel %></span
+          >
+        </li>
+      </ul>
+      <div class="card-body">
+        <a
+          href="/places/<%= foundPlace._id %>/edit"
+          class="card-link btn btn-primary"
+          >Edit Place</a
+        >
+        <form
+          class="d-inline"
+          action="/places/<%= foundPlace._id %>?_method=DELETE"
+          method="POST"
+        >
+          <button class="btn btn-danger card-link">Delete Place</button>
+        </form>
+      </div>
+      <div class="card-footer text-muted">2 days ago</div>
+    </div>
+  </div>
+</div>

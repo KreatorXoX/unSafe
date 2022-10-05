@@ -1,0 +1,66 @@
+<% layout('layouts/boilerplate') %>
+<div class="row">
+  <h1 class="text-center">Edit Place</h1>
+  <div class="col-6 offset-3">
+    <form action="/places/<%= placeToEdit._id %>?_method=PUT" method="POST" novalidate class="needs-validation">
+      <div class="mb-3">
+        <label for="title" class="form-label">Title</label>
+        <input
+          type="text"
+          class="form-control"
+          id="title"
+          name="place[title]"
+          value="<%= placeToEdit.title %>"
+          required
+        />
+      </div>
+      <div class="mb-3">
+        <label for="location" class="form-label">Location</label>
+        <input
+          type="text"
+          class="form-control"
+          id="location"
+          name="place[location]"
+          value="<%= placeToEdit.location %>"
+          required
+        />
+      </div>
+      <div class="mb-3">
+        <label for="image" class="form-label">Image URL</label>
+        <input
+          type="text"
+          class="form-control"
+          id="image"
+          name="place[image]"
+          value="<%= placeToEdit.image %>"
+        />
+      </div>
+      <div class="mb-3">
+        <label for="dangerLevel" class="form-label">Danger Level</label>
+        <div class="input-group">
+           <span class="input-group-text" id="danger-label">&#9888</span>
+           <input type="number" value="<%= placeToEdit.dangerLevel %>"  name="place[dangerLevel]" min="1" max="10" step="1" class="form-control" id="dangerLevel" placeholder="0 out of 10" aria-describedby="danger-label" required>
+        </div>
+      </div>
+      
+      <div class="mb-3">
+        <label for="description" class="form-label">Description</label>
+        <textarea
+          rows="3"
+          class="form-control"
+          id="description"
+          name="place[description]" 
+          required         
+        ><%= placeToEdit.description %></textarea>
+      </div>
+      <div class="row">
+        <div class="col-12 col-sm-6 mb-3">
+          <a href="/places/<%= placeToEdit._id %>" class="btn btn-warning text-white">Back to Place</a>
+        </div>
+        <div class="col-12 col-sm-6 mb-3 d-flex justify-content-sm-end">
+          <button class="btn btn-info text-white">Update Place</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

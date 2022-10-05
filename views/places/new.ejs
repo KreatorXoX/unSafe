@@ -1,0 +1,74 @@
+<% layout('layouts/boilerplate') %>
+<div class="row">
+  <h1 class="text-center">New Place</h1>
+  <div class="col-6 offset-3">
+    <form action="/places" method="POST" class="needs-validation" novalidate>
+      <div class="mb-3">
+        <label for="title" class="form-label">Title</label>
+        <input
+          type="text"
+          class="form-control"
+          id="title"
+          name="place[title]"
+           required
+        />
+      </div>
+        <div class="invalid-feedback">
+          Please provide a title.
+        </div> 
+      <div class="mb-3">
+        <label for="location" class="form-label">Location</label>
+        <input
+          type="text"
+          class="form-control"
+          id="location"
+          name="place[location]"
+          required
+        />
+      </div>
+      <div class="invalid-feedback">
+          Please provide a location.
+      </div>
+      <div class="mb-3">
+        <label for="image" class="form-label">Image URL</label>
+        <input
+          type="text"
+          class="form-control"
+          id="image"
+          name="place[image]"
+        />
+      </div>
+      <div class="mb-3">
+        <label for="dangerLevel" class="form-label">Danger Level</label>
+        <div class="input-group">
+           <span class="input-group-text" id="danger-label">&#9888</span>
+           <input type="number" required name="place[dangerLevel]" min="1" max="10" step="1" class="form-control" id="dangerLevel" placeholder="0 out of 10" aria-describedby="danger-label">
+           <div class="invalid-feedback">
+             Please provide a danger level.
+          </div> 
+        </div>
+      </div>
+      
+      <div class="mb-3">
+        <label for="description" class="form-label">Description</label>
+        <textarea
+          class="form-control"
+          id="description"
+          name="place[description]"
+          required
+        ></textarea>
+        <div class="invalid-feedback">
+          Please provide a description.
+        </div>  
+      </div>
+      <div class="row">
+        <div class="col-12 col-sm-6 mb-3">
+          <a href="/places" class="btn btn-warning text-white">Back to all places</a>
+        </div>
+        <div class="col-12 col-sm-6 mb-3 d-flex justify-content-sm-end">
+          <button class="btn btn-success">Add Place</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
