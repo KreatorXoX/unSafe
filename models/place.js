@@ -1,12 +1,20 @@
 const mongoose = require("mongoose");
+const Review = require("./review");
 const Schema = mongoose.Schema;
 
-const PlaceSchema = new Schema({
+const placeSchema = new Schema({
   title: String,
   image: String,
   dangerLevel: Number,
   description: String,
   location: String,
+  reviews: [{ type: Schema.Types.ObjectId, ref: "Review" }],
 });
 
-module.exports = mongoose.model("Place", PlaceSchema);
+placeSchema.post("findOneAndRemove", async function (data) {
+  if (data) {
+    await Review.deleteMany({ _id: { $in: data.reviews } });
+  }
+});
+
+module.exports = mongoose.model("Place", placeSchema);

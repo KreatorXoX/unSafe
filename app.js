@@ -3,8 +3,11 @@ const mongoose = require("mongoose");
 const path = require("path");
 const methodOverride = require("method-override");
 const ejsMate = require("ejs-mate");
-const catchAsync = require("./utils/catchAsync");
-const Place = require("./models/place");
+
+const ExpressError = require("./utils/ExpressError");
+
+const PlaceRoutes = require("./routes/placeRoutes");
+const ReviewRoutes = require("./routes/reviewRoutes");
 
 const app = express();
 
@@ -15,74 +18,27 @@ app.set("views", path.join(__dirname, "views"));
 
 app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride("_method"));
+app.use(express.static(path.join(__dirname, "public")));
+
+app.use("/places", PlaceRoutes);
+app.use("/places/:id/reviews", ReviewRoutes);
 
 app.get("/", (req, res) => {
   res.render("home");
 });
 
-app.get(
-  "/places",
-  catchAsync(async (req, res) => {
-    const allPlaces = await Place.find({});
-    res.render("places/index", { allPlaces });
-  })
-);
-
-app.get("/places/new", (req, res) => {
-  res.render("places/new");
+//for the unknown routes
+app.all("*", (req, res, next) => {
+  return next(new ExpressError("Page not Found", 404));
 });
-
-app.get(
-  "/places/:id",
-  catchAsync(async (req, res) => {
-    const { id } = req.params;
-    const foundPlace = await Place.findById(id);
-    res.render("places/show", { foundPlace });
-  })
-);
-
-app.get(
-  "/places/:id/edit",
-  catchAsync(async (req, res) => {
-    const { id } = req.params;
-    const placeToEdit = await Place.findById(id);
-
-    res.render("places/edit", { placeToEdit });
-  })
-);
-
-app.post(
-  "/places",
-  catchAsync(async (req, res) => {
-    const place = req.body.place;
-
-    const newPlace = new Place(place);
-    await newPlace.save();
-    res.redirect(`/places/${newPlace._id}`);
-  })
-);
-
-app.put(
-  "/places/:id",
-  catchAsync(async (req, res) => {
-    const { id } = req.params;
-    const place = req.body.place;
-    await Place.findByIdAndUpdate(id, place);
-    res.redirect(`/places/${id}`);
-  })
-);
-app.delete(
-  "/places/:id",
-  catchAsync(async (req, res) => {
-    const { id } = req.params;
-    await Place.findByIdAndRemove(id);
-    res.redirect(`/places`);
-  })
-);
 
 //handling errors occured in routes.
 app.use((err, req, res, next) => {
-  res.send("ohh boi");
+  const { status = 500 } = err;
+  if (!err.message) {
+    err.message = "Unknown Error Occured";
+  }
+  res.status(status).render("error", { err });
 });
 
 try {
