@@ -7,3 +7,5 @@ class ExpressError extends Error {
 }
 
 module.exports = ExpressError;
+
+// A classic custom error class.

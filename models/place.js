@@ -8,9 +8,11 @@ const placeSchema = new Schema({
   dangerLevel: Number,
   description: String,
   location: String,
+  creator: { type: Schema.Types.ObjectId, ref: "User" },
   reviews: [{ type: Schema.Types.ObjectId, ref: "Review" }],
 });
 
+// removing dependent documents just like its stated in the docs.
 placeSchema.post("findOneAndRemove", async function (data) {
   if (data) {
     await Review.deleteMany({ _id: { $in: data.reviews } });
