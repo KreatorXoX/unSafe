@@ -2,7 +2,7 @@
 <div class="row">
   <h1 class="text-center">New Place</h1>
   <div class="col-6 offset-3">
-    <form action="/places" method="POST" class="needs-validation shadow rounded p-4" novalidate>
+    <form action="/places" method="POST" enctype="multipart/form-data" class="needs-validation shadow rounded p-4" novalidate>
       <div class="mb-3">
         <label for="title" class="form-label">Title</label>
         <input
@@ -30,13 +30,15 @@
           Please provide a location.
       </div>
       <div class="mb-3">
-        <label for="image" class="form-label">Image URL</label>
+        <label for="image" class="form-label">Image</label>
+        <input type="file" multiple class="form-control" id="image" name="image"/>
+        <!-- <label for="image" class="form-label">Image URL</label>
         <input
           type="text"
           class="form-control"
           id="image"
           name="place[image]"
-        />
+        /> -->
       </div>
       <div class="mb-3">
         <label for="dangerLevel" class="form-label">Danger Level</label>

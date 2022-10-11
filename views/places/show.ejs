@@ -3,7 +3,9 @@
 <div class="row">
   <div class="col-6">
     <div class="card shadow-lg rounded mb-3">
-      <img src="<%= foundPlace.image %>" class="card-img-top" alt="place" />
+      <% for( let img of foundPlace.image ) { %>
+      <img src="<%= img.url %>" class="card-img-top" alt="place" />
+      <% } %>
       <div class="card-body">
         <h5 class="card-title"><%= foundPlace.title %></h5>
         <p class="card-text text-muted"><%= foundPlace.description %></p>

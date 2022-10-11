@@ -9,12 +9,21 @@ const {
 } = require("../middlewares/middlewares");
 const catchAsync = require("../utils/catchAsync");
 
+const multer = require("multer");
+const { storage } = require("../cloudinary/index");
+const upload = multer({ storage: storage });
+
 const router = express.Router();
 
 router
   .route("/")
   .get(catchAsync(places.listPlaces))
-  .post(isLoggedIn, validatePlace, catchAsync(places.createNewPlace));
+  .post(
+    isLoggedIn,
+    upload.array("image"),
+    validatePlace,
+    catchAsync(places.createNewPlace)
+  );
 
 router.get("/new", isLoggedIn, places.newPlaceForm);
 

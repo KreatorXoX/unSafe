@@ -42,8 +42,13 @@ module.exports.editPlaceForm = async (req, res) => {
 
 module.exports.createNewPlace = async (req, res) => {
   const place = req.body.place;
+  const images = req.files.map((file) => ({
+    url: file.path,
+    key: file.filename,
+  }));
 
   const newPlace = new Place(place);
+  newPlace.image = images;
   newPlace.creator = req.user._id;
   await newPlace.save();
 

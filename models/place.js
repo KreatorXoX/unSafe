@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 
 const placeSchema = new Schema({
   title: String,
-  image: String,
+  image: [{ url: String, key: String }],
   dangerLevel: Number,
   description: String,
   location: String,
