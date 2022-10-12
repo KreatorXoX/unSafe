@@ -1,3 +1,4 @@
+const { cloudinary } = require("../cloudinary/index");
 const Place = require("../models/place");
 
 module.exports.listPlaces = async (req, res) => {
@@ -50,6 +51,7 @@ module.exports.createNewPlace = async (req, res) => {
   const newPlace = new Place(place);
   newPlace.image = images;
   newPlace.creator = req.user._id;
+  console.log(newPlace);
   await newPlace.save();
 
   req.flash("success", "Created a new place");
@@ -58,9 +60,27 @@ module.exports.createNewPlace = async (req, res) => {
 
 module.exports.updatePlace = async (req, res) => {
   const { id } = req.params;
-  const place = req.body.place;
+  const { place, deleteImages } = req.body;
 
-  await Place.findByIdAndUpdate(id, place);
+  const images = req.files.map((file) => ({
+    url: file.path,
+    key: file.filename,
+  }));
+
+  const placeToUpdate = await Place.findByIdAndUpdate(id, place);
+
+  placeToUpdate.image.push(...images);
+  await placeToUpdate.save();
+
+  if (deleteImages && deleteImages.length > 0) {
+    for (let key of deleteImages) {
+      await cloudinary.uploader.destroy(key);
+    }
+
+    await placeToUpdate.updateOne({
+      $pull: { image: { key: { $in: deleteImages } } },
+    });
+  }
   req.flash("success", "Updated the place");
   res.redirect(`/places/${id}`);
 };

@@ -9,9 +9,7 @@
       <div class="card mb-3">
         <div class="row">
           <div class="col-md-4">
-            <% for(let img of place.image) { %> 
-              <img src="<%= img.url %>" class="img-fluid" alt="place">
-            <% } %>
+           <img src="<%= place.image[0].url %>" class="mw-100" style="max-height:20rem;" alt="">
           </div>
           <div class="col-md-8">
             <div class="card-body">

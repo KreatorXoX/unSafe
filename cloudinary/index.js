@@ -12,7 +12,12 @@ const storage = new CloudinaryStorage({
   cloudinary,
   params: {
     folder: "UnSafe",
-    allowedFormats: ["jpeg", "png", "jpg"],
+    allowed_formats: ["jpeg", "png", "jpg"],
+    transformation: {
+      height: 500,
+      width: 500,
+      crop: "fill",
+    },
   },
 });
 

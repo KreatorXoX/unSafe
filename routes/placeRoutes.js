@@ -30,7 +30,12 @@ router.get("/new", isLoggedIn, places.newPlaceForm);
 router
   .route("/:id")
   .get(catchAsync(places.showPlace))
-  .put(isLoggedIn, isCreator, catchAsync(places.updatePlace))
+  .put(
+    isLoggedIn,
+    isCreator,
+    upload.array("image"),
+    catchAsync(places.updatePlace)
+  )
   .delete(isLoggedIn, isCreator, catchAsync(places.deletePlace));
 
 router.get(

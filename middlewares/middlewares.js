@@ -20,7 +20,7 @@ module.exports.validatePlace = (req, res, next) => {
     const allErrorMessages = result.error.details
       .map((err) => err.message)
       .join(", ");
-
+    req.flash("error", "allErrorMessages.");
     throw new ExpressError(allErrorMessages, 500);
   } else {
     next();
@@ -33,7 +33,7 @@ module.exports.validateReview = (req, res, next) => {
     const allErrorMessages = result.error.details
       .map((err) => err.message)
       .join(", ");
-
+    req.flash("error", "allErrorMessages.");
     throw new ExpressError(allErrorMessages, 500);
   } else {
     next();
