@@ -1,4 +1,7 @@
 const { cloudinary } = require("../cloudinary/index");
+const mbxGeocoding = require("@mapbox/mapbox-sdk/services/geocoding");
+const mapToken = process.env.MAP_TOKEN;
+const geoCoder = mbxGeocoding({ accessToken: mapToken });
 const Place = require("../models/place");
 
 module.exports.listPlaces = async (req, res) => {
@@ -48,10 +51,17 @@ module.exports.createNewPlace = async (req, res) => {
     key: file.filename,
   }));
 
+  const response = await geoCoder
+    .forwardGeocode({ query: place.location, limit: 1 })
+    .send();
+
+  const placeGeo = await response.body.features[0].geometry;
   const newPlace = new Place(place);
   newPlace.image = images;
   newPlace.creator = req.user._id;
-  console.log(newPlace);
+  newPlace.geometry.type = placeGeo.type;
+  newPlace.geometry.coordinates = placeGeo.coordinates;
+
   await newPlace.save();
 
   req.flash("success", "Created a new place");

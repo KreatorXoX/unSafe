@@ -13,6 +13,14 @@ imageSchema.virtual("thumbnail").get(function () {
 const placeSchema = new Schema({
   title: String,
   image: [imageSchema],
+  geometry: {
+    type: {
+      type: String,
+      enum: ["Point"],
+      required: true,
+    },
+    coordinates: { type: [Number], required: true },
+  },
   dangerLevel: Number,
   description: String,
   location: String,
