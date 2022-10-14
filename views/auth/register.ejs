@@ -1,6 +1,62 @@
 <% layout('layouts/boilerplate') %>
 
-<div class="row border border-2 p-4">
+<link rel="stylesheet" href="/css/loginRegister.css">
+
+    <div class="container h-100">
+      <div class="login_name_wrapper">
+        <div class="d-flex justify-content-center">Un<i>Safe</i></div>
+      </div>
+      <div class="d-flex justify-content-center h-50">
+        <div class="user_card">
+          <div class="d-flex justify-content-center">
+            <div class="login_logo_container">
+              <img src="/logo/logo1.png" class="login_logo" alt="Logo" />
+            </div>
+          </div>
+          <div class="d-flex justify-content-center form_container">
+            <form action="/register" class="needs-validation" method="POST" novalidate>
+              <div class="mb-3">
+                <label for="username" class="form-label">Username</label>
+                <input
+                  class="form-control"
+                  id="username"
+                  name="username"
+                  required
+                ></input>
+                <div class="invalid-feedback">Please provide a Username.</div>
+              </div>
+              <div class="mb-3">
+                <label for="email" class="form-label">E-mail</label>
+                <input
+                type="email"
+                  class="form-control"
+                  id="email"
+                  name="email"
+                  required
+                ></input>
+                <div class="invalid-feedback">Please provide an E-mail.</div>
+              </div>
+              <div class="mb-3">
+                <label for="password" class="form-label">Password</label>
+                <input
+                type="password"
+                  class="form-control"
+                  id="password"
+                  name="password"
+                  required
+                ></input>
+                <div class="invalid-feedback">Please provide a Password.</div>
+              </div>
+              <button class="btn login_btn">Register</button>
+            </form>
+         
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+<!-- <div class="row border border-2 p-4">
   <div class="col-6 offset-3">
 <h1 class="mb-4 text-center">Register Page</h1>
 
@@ -40,5 +96,5 @@
   <button class="btn btn-sm btn-success">Register</button>
 </form>
   </div>
-</div>
+</div> -->
 
