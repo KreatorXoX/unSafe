@@ -2,7 +2,6 @@
 <link rel="stylesheet" href="/css/rating.css" />
 <div class="row">
   <div class="col-6">
-    <div id="map" style="width: 350px; height: 300px"></div>
     <div class="card shadow-lg rounded mb-3">
       <div
         id="carouselExampleControlsNoTouching"
@@ -16,6 +15,7 @@
             <img
               src="<%= foundPlace.image[i].url %>"
               class="d-block w-100"
+              style="max-height: 25rem"
               alt="..."
             />
           </div>
@@ -79,6 +79,7 @@
     </div>
   </div>
   <div class="col-6">
+    <div id="map" style="width: 100%; height: 20rem"></div>
     <% if (currentUser) { %>
     <div class="mb-3">
       <h2>Leave a Review</h2>
@@ -179,7 +180,7 @@
 
 <script>
   const mapKey = "<%-process.env.MAP_TOKEN%>";
-  const place = JSON.stringify(<%-foundPlace.geometry%>);
+  const place = <%- JSON.stringify(foundPlace) %>;
 </script>
 
 <script src="/js/showMap.js"></script>

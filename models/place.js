@@ -10,22 +10,33 @@ const imageSchema = new Schema({
 imageSchema.virtual("thumbnail").get(function () {
   return this.url.replace("/upload", "/upload/w_200");
 });
-const placeSchema = new Schema({
-  title: String,
-  image: [imageSchema],
-  geometry: {
-    type: {
-      type: String,
-      enum: ["Point"],
-      required: true,
+const options = { toJSON: { virtuals: true } };
+const placeSchema = new Schema(
+  {
+    title: String,
+    image: [imageSchema],
+    geometry: {
+      type: {
+        type: String,
+        enum: ["Point"],
+        required: true,
+      },
+      coordinates: { type: [Number], required: true },
     },
-    coordinates: { type: [Number], required: true },
+    dangerLevel: Number,
+    description: String,
+    location: String,
+    creator: { type: Schema.Types.ObjectId, ref: "User" },
+    reviews: [{ type: Schema.Types.ObjectId, ref: "Review" }],
   },
-  dangerLevel: Number,
-  description: String,
-  location: String,
-  creator: { type: Schema.Types.ObjectId, ref: "User" },
-  reviews: [{ type: Schema.Types.ObjectId, ref: "Review" }],
+  options
+);
+
+placeSchema.virtual("properties").get(function () {
+  return {
+    title: `<a href="/places/${this._id}">${this.title}</a>`,
+    danger: this.dangerLevel,
+  };
 });
 
 // removing dependent documents just like its stated in the docs.
