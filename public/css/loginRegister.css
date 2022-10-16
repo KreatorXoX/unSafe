@@ -8,38 +8,36 @@ body {
 }
 
 .user_card {
-  height: 30rem;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-weight: 900;
   width: 30rem;
   max-width: 50rem;
   margin-top: auto;
-  margin-bottom: 3rem;
   background: #fff;
   position: relative;
   display: flex;
-  justify-content: center;
   flex-direction: column;
   padding: 10px;
   box-shadow: 0 0px 4px 2px rgba(243, 208, 208, 0.5);
   border-radius: 5px;
 }
 .login_name_wrapper {
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  font-weight: 900;
   height: 20% !important;
   min-height: 10rem;
   margin-bottom: auto;
   margin-top: auto;
-  position: relative;
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
+  text-align: center;
   color: #fff;
   font-size: 35px;
   font-weight: bold;
 }
 .login_logo_container {
   position: absolute;
-  height: 10rem;
-  width: 12rem;
-  top: -4.5rem;
+  height: 8.35rem;
+  width: 11rem;
+  top: -7rem;
   border-radius: 50%;
   background: #25293a;
   padding: 10px;
@@ -47,18 +45,25 @@ body {
   box-shadow: 0px -10px 15px -5px rgb(255, 188, 73);
 }
 .login_logo {
-  height: 9rem;
-  width: 10rem;
+  height: 7rem;
+  width: 8rem;
   border-radius: 50%;
 }
 .form_container {
-  margin-top: 0.5rem;
+  margin-top: 1rem;
 }
 .login_btn {
   width: 100%;
   background: #25293a !important;
   color: white !important;
-  transition: background-color 0.5s ease-in-out;
+  transition: background-color 0.33s ease-in-out;
+  margin-bottom: 2rem;
+  margin-top: 1rem;
+}
+.login_btn:hover {
+  background-color: #fff !important;
+  color: #25293a !important;
+  border: #25293a solid 1px;
 }
 
 .login_container {

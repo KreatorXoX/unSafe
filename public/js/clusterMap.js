@@ -4,7 +4,7 @@ const map = new mapboxgl.Map({
   // Choose from Mapbox's core styles, or make your own style with Mapbox Studio
   style: "mapbox://styles/mapbox/light-v10",
   center: [-103.5917, 40.6699],
-  zoom: 3,
+  zoom: 4,
 });
 
 map.on("load", () => {

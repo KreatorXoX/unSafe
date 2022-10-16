@@ -15,6 +15,7 @@ const placeSchema = new Schema(
   {
     title: String,
     image: [imageSchema],
+    creationDate: Date,
     geometry: {
       type: {
         type: String,

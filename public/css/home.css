@@ -30,7 +30,13 @@ main span {
   border-bottom-color: rgb(255, 47, 238);
 }
 
-.btn-secondary,
-.btn-secondary:hover {
+.btn-secondary {
   color: #333;
+  background-color: #fff;
+  /* margin-bottom: 0.75rem; */
+}
+
+.btn-secondary:hover {
+  background-color: #333;
+  color: #fff;
 }

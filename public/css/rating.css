@@ -191,3 +191,12 @@
     display: none;
   }
 }
+
+.carousel-item img {
+  object-fit: cover;
+  object-position: center;
+  overflow: hidden;
+  height: 20em;
+  display: block;
+  width: 100%;
+}

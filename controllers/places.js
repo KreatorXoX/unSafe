@@ -59,6 +59,7 @@ module.exports.createNewPlace = async (req, res) => {
   const newPlace = new Place(place);
   newPlace.image = images;
   newPlace.creator = req.user._id;
+  newPlace.creationDate = new Date();
   newPlace.geometry.type = placeGeo.type;
   newPlace.geometry.coordinates = placeGeo.coordinates;
 
