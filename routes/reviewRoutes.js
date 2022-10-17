@@ -1,7 +1,5 @@
 const express = require("express");
 
-// const Place = require("../models/place");
-// const Review = require("../models/review");
 const reviews = require("../controllers/reviews");
 const {
   validateReview,

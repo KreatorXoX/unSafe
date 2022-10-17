@@ -1,8 +1,10 @@
-const { cloudinary } = require("../cloudinary/index");
 const mbxGeocoding = require("@mapbox/mapbox-sdk/services/geocoding");
+
+const { cloudinary } = require("../cloudinary/index");
+const Place = require("../models/place");
+
 const mapToken = process.env.MAP_TOKEN;
 const geoCoder = mbxGeocoding({ accessToken: mapToken });
-const Place = require("../models/place");
 
 module.exports.listPlaces = async (req, res) => {
   const { search } = req.query;

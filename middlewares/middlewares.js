@@ -1,7 +1,7 @@
 const Place = require("../models/place");
 const Review = require("../models/review");
-const { validPlaceSchema } = require("../validationSchemas");
-const { validReviewSchema } = require("../validationSchemas");
+const { validPlaceSchema } = require("../utils/validationSchemas");
+const { validReviewSchema } = require("../utils/validationSchemas");
 const ExpressError = require("../utils/ExpressError");
 
 module.exports.isLoggedIn = (req, res, next) => {
