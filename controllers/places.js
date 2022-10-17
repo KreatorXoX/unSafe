@@ -5,7 +5,22 @@ const geoCoder = mbxGeocoding({ accessToken: mapToken });
 const Place = require("../models/place");
 
 module.exports.listPlaces = async (req, res) => {
-  const allPlaces = await Place.find({});
+  const { search } = req.query;
+
+  let allPlaces;
+  if (search) {
+    allPlaces = await Place.find({
+      location: { $regex: search, $options: "i" },
+    });
+  } else {
+    allPlaces = await Place.find({});
+  }
+
+  if (!allPlaces || allPlaces.length === 0) {
+    req.flash("error", "No place found with given criteria");
+    return res.redirect("/places");
+  }
+
   res.render("places/index", { allPlaces });
 };
 
