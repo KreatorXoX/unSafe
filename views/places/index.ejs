@@ -15,37 +15,91 @@
   <a href="/places/new" class="btn btn-success my-3">Add new place</a>
 </div>
 
-<% for (let place of allPlaces){%>
-<div class="card mb-3">
-  <div class="row">
-    <div class="col-md-4">
-      <% if (place.image[0]) { %>
-      <img
-        src="<%= place.image[0].url %>"
-        class="mw-100"
-        style="max-height: 20rem"
-        alt=""
-      />
-      <% } %>
-    </div>
-    <div class="col-md-8">
-      <div class="card-body">
-        <h5 class="card-title"><%= place.title %></h5>
-        <p class="card-text"><%= place.description %></p>
-        <p class="card-text">
-          <span class="text-muted"><%= place.location %></span>
-        </p>
-        <a href="/places/<%= place._id %> " class="btn btn-primary"
-          >View <%= place.title %>
-        </a>
+<!-- <% for( let i = 0; i < allPlaces.length-1; i+=2 ) { %>
+    <div class="card mb-3">
+      <div class="row">
+        <div class="col-lg-2">
+          <% if (allPlaces[i].image[0]) { %>
+          <img
+            src="<%= allPlaces[i].image[0].url %>"
+            class="mw-100"
+            style="max-height: 20rem"
+            alt=""
+          />
+          <% } %>
+        </div>
+        <div class="col-lg-4">
+          <div class="card-body">
+            <h5 class="card-title"><%= allPlaces[i].title %></h5>
+            <p class="card-text"><%= allPlaces[i].description %></p>
+            <p class="card-text">
+              <span class="text-muted"><%= allPlaces[i].location %></span>
+            </p>
+            <a href="/places/<%= allPlaces[i]._id %> " class="btn btn-primary"
+              >View <%= allPlaces[i].title %>
+            </a>
+          </div>
+        </div>
+
+        <div class="col-lg-2 border-start">
+          <% if (allPlaces[i+1].image[0]) { %>
+          <img
+            src="<%= allPlaces[i+1].image[0].url %>"
+            class="mw-100"
+            style="max-height: 20rem"
+            alt=""
+          />
+          <% } %>
+        </div>
+        <div class="col-lg-4">
+          <div class="card-body">
+            <h5 class="card-title"><%= allPlaces[i+1].title %></h5>
+            <p class="card-text"><%= allPlaces[i+1].description %></p>
+            <p class="card-text">
+              <span class="text-muted"><%= allPlaces[i+1].location %></span>
+            </p>
+            <a href="/places/<%= allPlaces[i+1]._id %> " class="btn btn-primary"
+              >View <%= allPlaces[i+1].title %>
+            </a>
+          </div>
+        </div>
       </div>
     </div>
+    <% } %> -->
+
+    <% for (let place of allPlaces){%>
+    <div class="card mb-3">
+      <div class="row">
+        <div class="col-md-4">
+          <% if (place.image[0]) { %>
+          <img
+            src="<%= place.image[0].url %>"
+            class="mw-100"
+            style="max-height: 20rem"
+            alt=""
+          />
+          <% } %>
+        </div>
+        <div class="col-md-8">
+          <div class="card-body">
+            <h5 class="card-title"><%= place.title %></h5>
+            <p class="card-text"><%= place.description %></p>
+            <p class="card-text">
+              <span class="text-muted"><%= place.location %></span>
+            </p>
+            <a href="/places/<%= place._id %> " class="btn btn-primary"
+              >View <%= place.title %>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <% } %>
+    <script>
+
+      const mapKey = "<%-process.env.MAP_TOKEN%>";
+      const places = {features:<%- JSON.stringify(allPlaces) %>};
+    </script>
+    <script src="/js/clusterMap.js"></script>
   </div>
 </div>
-<% } %>
-<script>
-
-  const mapKey = "<%-process.env.MAP_TOKEN%>";
-  const places = {features:<%- JSON.stringify(allPlaces) %>};
-</script>
-<script src="/js/clusterMap.js"></script>
